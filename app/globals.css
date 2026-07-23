@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ *  nexious — "The Long Path"
+ *  sumi-e ink  ·  forged steel  ·  a single ember
+ * ------------------------------------------------------------------ */
+
+@theme {
+  /* palette */
+  --color-ink: #0b0b0d; /* warm near-black base           */
+  --color-ink-2: #101014; /* raised void                    */
+  --color-surface: #16161a; /* cards / panels                 */
+  --color-line: #26262c; /* hairline borders               */
+  --color-bone: #ede8df; /* primary text                   */
+  --color-muted: #8a857b; /* secondary text                 */
+  --color-faint: #55524c; /* tertiary / disabled            */
+  --color-ember: #c6552f; /* the one accent — used sparingly*/
+  --color-ember-soft: #e0774f;
+
+  /* type */
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jbmono);
+
+  /* motion */
+  --ease-blade: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-ink);
+}
+
+/* --- film grain over the whole page ------------------------------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- an ink-brush hairline used between sections ------------------ */
+.ink-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line) 12%,
+    var(--color-line) 88%,
+    transparent
+  );
+}
+
+/* --- mono eyebrow / kicker --------------------------------------- */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* --- subtle vertical grain on scrollbar -------------------------- */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-faint);
+}
+
+/* --- where a 3D canvas will later mount -------------------------- */
+.model-stage {
+  position: relative;
+  border: 1px dashed var(--color-line);
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(198, 85, 47, 0.06),
+    transparent 70%
+  );
+}
+.model-stage::before {
+  content: attr(data-model);
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+/* --- reveal-on-scroll baseline (JS/GSAP wires this up later) ------ */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: rise 0.9s var(--ease-blade) forwards;
+  }
+}
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
