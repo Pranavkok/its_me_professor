@@ -2,7 +2,9 @@ import TopBar from "@/components/TopBar";
 import SectionRail from "@/components/SectionRail";
 import SmoothScroll from "@/components/SmoothScroll";
 import Stage3D from "@/components/three/Stage3D";
+import GutsStage from "@/components/three/GutsStage";
 import HeroDirector from "@/components/HeroDirector";
+import AboutDirector from "@/components/AboutDirector";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -15,8 +17,11 @@ export default function Home() {
     <>
       <SmoothScroll />
       <HeroDirector />
-      {/* the single persistent 3D layer, fixed behind everything */}
+      <AboutDirector />
+      {/* Hero model — fixed full-screen canvas */}
       <Stage3D />
+      {/* Guts model — second fixed canvas, visible only during About section */}
+      <GutsStage />
 
       <TopBar />
       <SectionRail />
