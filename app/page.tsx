@@ -5,6 +5,7 @@ import Stage3D from "@/components/three/Stage3D";
 import GutsStage from "@/components/three/GutsStage";
 import HeroDirector from "@/components/HeroDirector";
 import AboutDirector from "@/components/AboutDirector";
+import ProjectsDirector from "@/components/ProjectsDirector";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -18,6 +19,7 @@ export default function Home() {
       <SmoothScroll />
       <HeroDirector />
       <AboutDirector />
+      <ProjectsDirector />
       {/* Hero model — fixed full-screen canvas */}
       <Stage3D />
       {/* Guts model — second fixed canvas, visible only during About section */}
@@ -36,7 +38,6 @@ export default function Home() {
         <Projects />
         <hr className="ink-rule mx-auto max-w-6xl" />
         <Internship />
-        <hr className="ink-rule mx-auto max-w-6xl" />
         <Contact />
       </main>
     </>
